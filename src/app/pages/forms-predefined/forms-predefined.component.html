@@ -1,0 +1,94 @@
+<div class="mx-auto max-w-3xl lg:max-w-7xl">
+    <!-- Main 3 column grid -->
+    <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-3 lg:gap-8">
+        <!-- Left column -->
+        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+            <section aria-labelledby="section-1-title">
+                <div class="overflow-hidden rounded-lg bg-white shadow">
+                    <div class="p-6">
+                        <form [formGroup]="formGroup" class="space-y-8 divide-y divide-slate-200">
+                            <div class="space-y-8 divide-y divide-slate-200">
+                                <div>
+                                    <div>
+                                        <h3 class="text-lg font-medium leading-6 text-slate-900">Basic informations</h3>
+                                        <p class="mt-1 text-sm text-slate-500">This information will be displayed publicly so be careful what you share.</p>
+                                    </div>
+
+                                    <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                                        <div class="sm:col-span-4">
+                                            <label class="block text-sm font-medium text-slate-700">Email address</label>
+                                            <div class="mt-1">
+                                                <input formControlName="email" type="email" autocomplete="email" [ngClass]="{'!border-red-400 focus:ring-red-400': email?.invalid && email?.dirty}"
+                                                       class="block w-full rounded-md border-slate-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                                            </div>
+                                            <p class="mt-2 text-sm text-red-600" id="email-error" *ngIf="email?.invalid && email?.dirty">Your email is not correct. Please provide a valid email.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-6 grid grid-cols-1 gap-y-2 gap-x-4 sm:grid-cols-6" formGroupName="name">
+                                        <div class="sm:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">First name</label>
+                                            <div class="mt-1">
+                                                <input formControlName="first" autocomplete="given-name" [ngClass]="{'!border-red-400 focus:ring-red-400': firstname?.invalid && firstname?.dirty}"
+                                                       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                                            </div>
+                                        </div>
+
+                                        <div class="sm:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-700">Last name</label>
+                                            <div class="mt-1">
+                                                <input formControlName="last" autocomplete="family-name" [ngClass]="{'!border-red-400 focus:ring-red-400': lastname?.invalid && lastname?.dirty}"
+                                                       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
+                                            </div>
+                                        </div>
+
+                                        <p class="col-span-6 mt-0 text-sm text-red-600" id="" *ngIf="name?.invalid && name?.dirty">Please provide both valid firstname and lastname</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-5">
+                                <div class="flex justify-end">
+                                    <button type="button"
+                                            class="rounded-md border border-slate-300 bg-white py-2 px-4 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                                        Cancel
+                                    </button>
+                                    <button type="submit" [disabled]="!formGroup.valid"
+                                            class="ml-3 inline-flex justify-center rounded-md border border-transparent bg-primary/95 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right column -->
+        <div class="grid grid-cols-1 gap-4">
+            <section aria-labelledby="section-2-title">
+                <div class="overflow-hidden rounded-lg bg-white shadow">
+                    <div class="p-6">
+                        <h3 class="font-light text-xl text-slate-600">Your data</h3>
+
+                        <div class="mt-6 rounded-lg bg-slate-100 p-4 lg:py-6">
+                            <div class="flex items-center justify-between text-sm">
+                                <span class="text-slate-700 font-medium text-lg">Status : </span>
+                                @if (allValid) {
+                                    <span class="font-bold text-green-700 uppercase">✅ All valid</span>
+                                } @else {
+                                    <span class="font-bold text-orange-500 uppercase">⚠️ Invalid inputs</span>
+                                }
+                            </div>
+                            <div class="font-mono text-slate-500 bg-slate-200 text-sm mt-6 p-4 rounded-lg">
+                                {{ formGroup.value | json }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
